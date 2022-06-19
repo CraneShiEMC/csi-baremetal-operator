@@ -118,6 +118,11 @@ func (c *Controller) handleNodeRemoval(ctx context.Context, csibmnodes []nodecrd
 
 	isNodesTainted := getMapIsNodesTainted(nodes, rTaint)
 
+	c.log.Info("Nodes List: ")
+	for _, node := range nodes {
+		c.log.Info(fmt.Sprintf("Node %s", node.Name))
+	}
+
 	for i, csibmnode := range csibmnodes {
 		hasLabel := false
 		hasTaint := false
@@ -132,6 +137,7 @@ func (c *Controller) handleNodeRemoval(ctx context.Context, csibmnodes []nodecrd
 
 		// perform node removal
 		if hasLabel && !hasNode {
+			c.log.Info(fmt.Sprintf("Csibmnode %s will be deleted", csibmnode.Name))
 			removingNodes = append(removingNodes, csibmnode)
 			continue
 		}
