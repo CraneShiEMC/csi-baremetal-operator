@@ -168,7 +168,7 @@ func (c *Controller) removeNodes(ctx context.Context, csibmnodes []nodecrd.Node)
 	)
 
 	if len(csibmnodes) > 0 {
-		c.log.Debugf("Starting Node Removal, node count: %d", len(csibmnodes))
+		c.log.Infof("Starting Node Removal, node count: %d", len(csibmnodes))
 	}
 
 	for i := range csibmnodes {
@@ -264,7 +264,7 @@ func (c *Controller) handleNodeMaintenance(ctx context.Context, nodes []corev1.N
 	for i, node := range nodes {
 		if hasTaint(&nodes[i], mTaint) {
 			if logStart {
-				c.log.Debug("Starting Node Maintenance")
+				c.log.Info("Starting Node Maintenance")
 				logStart = false
 			}
 			if err := c.deleteCSIPods(ctx, node.Name); err != nil {
